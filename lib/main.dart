@@ -6,6 +6,7 @@ import 'package:lit_firebase_ui_demo/screens/splash.dart';
 
 import 'screens/home.dart';
 import 'screens/auth/auth.dart';
+import 'screens/home.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,6 +14,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LitAuthInit(
+      authProviders: AuthProviders(
+        emailAndPassword: true,
+        google: true,
+        twitter: true,
+      ),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Material App',
@@ -25,12 +31,10 @@ class MyApp extends StatelessWidget {
             color: Palette.darkBlue,
           ),
         ),
+        home: const LitAuthState(
+            authenticated: HomeScreen(), unauthenticated: SplashScreen()),
 
-        // home: const LitAuthState(
-        //   authenticated: Home(),
-        //   unauthenticated: Unauthenticated(),
-        // ),
-        home: const SplashScreen(),
+        // home: const SplashScreen(),
       ),
     );
   }
